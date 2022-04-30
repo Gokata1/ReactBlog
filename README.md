@@ -1,4 +1,7 @@
 # ReactBlog
+
+Create Database in MySQL using queries in queries.txt
+
 Open terminal in ./Server folder
 Type following commands in terminal to set up the server at port 5000
 npm install 

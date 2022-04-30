@@ -1,0 +1,56 @@
+.singlePost{
+    flex: 75%;
+}
+
+.singlePostWrapper{
+    padding: 20px;
+    padding-right: 0px;
+}
+
+.singlePostImage{
+    width: 100%;
+}
+
+.singlePostTitle{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.iconEdit{
+    /* float: right; */
+    font-size: 25px;
+    color: chartreuse; 
+}
+.iconDelete{
+    /* float: right; */
+    font-size: 20px;
+    color: crimson;
+}
+
+
+.singlePostIcon{
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.singlePostInfo{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    color: blueviolet;
+    font-size: 15px;
+}
+
+.singlePostDesc{
+    color: #666;
+    font-size: 16px;
+    margin-top: 20px;
+    line-height: 25px;
+}
+
+.singlePostDesc::first-letter{
+    margin-left: 20px;
+    font-size: 50px;
+    font-weight: 600;
+    font-style: italic;
+}

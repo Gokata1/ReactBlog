@@ -1,0 +1,16 @@
+CREATE SCHEMA `posts` ;
+USE posts
+
+CREATE TABLE `posts`.`posts_table` (
+  `post_id` VARCHAR(50) NOT NULL,
+  `post_title` VARCHAR(200) NOT NULL,
+  `post_author` VARCHAR(45) NOT NULL,
+  `post_time_created` TIMESTAMP(6) NOT NULL,
+  `post_content` LONGTEXT NOT NULL,
+  `post_last_edited` TIMESTAMP(6) NULL,
+  PRIMARY KEY (`post_id`));
+
+INSERT INTO `posts`.`posts_table` (`post_id`, `post_title`, `post_author`, `post_time_created`, `post_content`) VALUES ('4234234_#4234', 'First Sample_Post is here', 'me', SYSDATE(), 'Here is some sample data')
+
+INSERT INTO `posts`.`posts_table` (`post_id`, `post_title`, `post_author`, `post_time_created`, `post_content`) VALUES ('1jsdsdsdk_@#fsds', 'Second Sample_Post is here', 'me', SYSDATE(), 'Here is some sample data,AND MORE AND MORE and more more more')
+

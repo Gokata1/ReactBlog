@@ -1,0 +1,22 @@
+.writeInput{
+    border: none;
+    font-size: 30px;
+}
+
+.textInput{
+    margin-top: 20px;
+    font-size: 20px;
+    height: 400px;
+    margin-bottom: 10px;
+}
+
+.btnSubmit{
+    color: white;
+    background-color: teal;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    width: 100px;
+}

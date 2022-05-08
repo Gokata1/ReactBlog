@@ -5,6 +5,8 @@ import {v4 as uuidv4} from 'uuid';
 import cors from 'cors';
 
 const app = express();
+
+console.log(process.env);
 const PORT = process.env.PORT || 5000
 
 app.use(cors());
@@ -14,6 +16,7 @@ app.use(function(req,res, next){
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+app.use(bodyParser.json());
 
 
 var mysqlConnection = mysql.createConnection({
@@ -28,8 +31,6 @@ mysqlConnection.connect((err) => {
     if(!err) console.log("Connection established Successfully!!!!");
     else console.log('Connection Failed!'+ JSON.stringify(err,undefined,2));
 });
-
-app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
     res.send("Hello to a Server for blog app");

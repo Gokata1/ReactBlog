@@ -13,4 +13,3 @@ CREATE TABLE `posts`.`posts_table` (
 INSERT INTO `posts`.`posts_table` (`post_id`, `post_title`, `post_author`, `post_time_created`, `post_content`) VALUES ('4234234_#4234', 'First Sample_Post is here', 'me', SYSDATE(), 'Here is some sample data')
 
 INSERT INTO `posts`.`posts_table` (`post_id`, `post_title`, `post_author`, `post_time_created`, `post_content`) VALUES ('1jsdsdsdk_@#fsds', 'Second Sample_Post is here', 'me', SYSDATE(), 'Here is some sample data,AND MORE AND MORE and more more more')
-

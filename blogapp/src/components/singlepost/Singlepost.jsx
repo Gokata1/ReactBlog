@@ -1,18 +1,14 @@
-import './singlePost.css'
+import './singlePost.css';
 import Card from 'react-bootstrap/Card';
-import axios from 'axios';
-import {useState, useEffect } from 'react';
+import {useState, useEffect, useCallback } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import { Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap';
+import API from '../../Api.js';
 
 export default function SinglePost( {post_id} ) {
   let navigate = useNavigate()
-
-  const api = axios.create({
-    baseURL: 'http://localhost:5000/posts'
-  });
 
   const [data, setData] = useState({
     post_title: '',
@@ -20,20 +16,20 @@ export default function SinglePost( {post_id} ) {
     post_content: ''
   })
 
-  function getData(){
-    api.get(`/${post_id}`)
+  const getData = useCallback( () => {
+    API.get(`/${post_id}`)
       .then(response => {
-        setData(response.data[0]);
+        setData(response.data);
       })
       .catch(err => console.log(err));
-  }
+  }, [ post_id ]);
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
 
   function deletePost(){
-    api.delete(`/${post_id}`).then(res => console.log(res)).catch(err => console.log(err));
+    API.delete(`/${post_id}`).then(res => console.log(res)).catch(err => console.log(err));
     alert("Post Deleted");
     navigate('/home');
   }
@@ -47,7 +43,7 @@ export default function SinglePost( {post_id} ) {
             <Card.Text>
               {data.post_content}
             </Card.Text>
-            <Card.Link as={Link} to={`update`}><i className="singlePostIcon iconEdit fa-solid fa-square-pen m"></i></Card.Link>
+            <Card.Link as={Link} to={`/posts/update/${post_id}`}><i className="singlePostIcon iconEdit fa-solid fa-square-pen m"></i></Card.Link>
             <Popup trigger={
                 <Card.Link >
                   <i className="singlePostIcon iconDelete fa-solid fa-trash-can"/>

@@ -1,15 +1,11 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import './post.css';
-import axios from 'axios';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useCallback, memo} from 'react';
 import { Link } from 'react-router-dom';
+import API from '../../Api.js';
 
-export default function Post({post_id}) {
-
-  const api = axios.create({
-    baseURL: `http://localhost:5000/posts`
-  });
+function Post({post_id}) {
 
   const [data, setData] = useState({
     post_title: '',
@@ -17,17 +13,17 @@ export default function Post({post_id}) {
     post_content: ''
   });
 
-  function getData(){
-    api.get(`/${post_id}`)
+  const getData = useCallback( () => {
+    API.get(`/${post_id}`)
       .then(response => {
-        setData(response.data[0]);
+        setData(response.data);
       })
       .catch(err => console.log(err));
-  };
+  }, [post_id])
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
 
   return (
     <div className="post m-2 ">
@@ -38,9 +34,11 @@ export default function Post({post_id}) {
             <Card.Text className="cardContent overflowControl" >
               {data.post_content}
             </Card.Text>
-            <Card.Link as={Link} to={`/single/${post_id}`}>Read...</Card.Link>
+            <Card.Link as={Link} to={`/posts/${post_id}`}>Read...</Card.Link>
           </Card.Body>
         </Card>        
     </div>
   )
 }
+
+export default memo(Post);

@@ -1,19 +1,15 @@
 import React from 'react';
 import'./create.css';
-import axios from 'axios';
 import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import API from '../../Api.js';
 
 export default function Create () {
   const [data, setData] = useState({
     post_title:'',
     post_author:"John Doe",
     post_content: ""
-  });
-
-  const api = axios.create({
-    baseURL: "http://localhost:5000/posts"
-  });
+  })
 
   let navigate = useNavigate('/home');
 
@@ -21,12 +17,12 @@ export default function Create () {
     setData({...data, [location]: value});
   };
 
-  function postData(){
+   async function postData(){
     if(!data.post_title || !data.post_content){
       alert(`${(!data.post_title) ?"Title"  : "Content"} can not be empty!!`)
     }else{
       alert("New Post Created!!!!!");
-      api.post('/',data).then(res => console.log(res)).catch(err => console.log(err));
+      await API.post("",data).then(response => console.log(response)).catch(error => console.log(error));
       navigate('/home');
     }
   }

@@ -1,37 +1,33 @@
 import React from 'react';
 import'./update.css';
 import { useParams, useNavigate } from 'react-router-dom';
-import {useState, useEffect } from 'react';
-import axios from 'axios';
+import {useState, useEffect, useCallback } from 'react';
+import API from '../../Api.js'
 
 export default function Update() {
   const { id } = useParams();
-  let navigate = useNavigate()
-
-  const api = axios.create({
-    baseURL: 'http://localhost:5000/posts'
-  });
+  let navigate = useNavigate();
 
   const [data, setData] = useState({
     post_title: '',
     post_author: '',
     post_content: ''
-  })
+  });
 
-  function getData(){
-    api.get(`/${id}`)
+  const getData = useCallback( () => {
+    API.get(`/${id}`)
       .then(response => {
-        setData(response.data[0]);
+        setData(response.data);
       })
       .catch(err => console.log(err));
-  }
+  }, [ id ]);
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [ getData ]);
 
   function handleChange(value, location){
-    setData({...data, [location] : value})
+    setData((data) => ( { ...data, [location] : value} ));
   };
 
   function handleFormSubmit(){
@@ -45,7 +41,7 @@ export default function Update() {
   }
 
   function updateData(){
-    api.put(`/${id}`, data )
+    API.put(`/${id}`, data )
       .then(function (response){
         console.log(response);
       }).catch(function (err){
@@ -70,10 +66,10 @@ export default function Update() {
             type='text' className='writeInput textInput' 
             value={data.post_content}
             onChange={(event) => handleChange(event.target.value, "post_content")}
-          />
+            />
         </div>
       </form>
-      <button className='btnSubmit ms-3' onClick={handleFormSubmit}>Publish</button>
+      <button className='btnSubmit ms-3' onClick={handleFormSubmit}>Update</button>
     </div>
   )
 }
